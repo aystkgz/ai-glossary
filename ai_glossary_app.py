@@ -71,28 +71,3 @@ if len(st.session_state.search_history) > 0:
 # Arama geçmişini güncelle
 if search_term and search_term not in st.session_state.search_history:
     st.session_state.search_history.append(search_term)
-
-# Yeni terim ekleme formu
-st.write("### Yeni Terim Ekle")
-new_english = st.text_input("İngilizce Terim:", key="new_english")
-new_turkish = st.text_input("Türkçe Terim:", key="new_turkish")
-new_azerbaijani = st.text_input("Azerbaycan Türkçesi Terim:", key="new_azerbaijani")
-new_description = st.text_area("Açıklama:", key="new_description")
-
-# Kullanıcı yeni terim eklerse
-if st.button("Yeni Terim Ekle"):
-    if new_english and new_turkish and new_azerbaijani and new_description:
-        new_row = {
-            "English": new_english,
-            "Turkish": new_turkish,
-            "Azerbaijani": new_azerbaijani,
-            "Description": new_description
-        }
-        df = df.append(new_row, ignore_index=True)
-        st.session_state.new_english = ""
-        st.session_state.new_turkish = ""
-        st.session_state.new_azerbaijani = ""
-        st.session_state.new_description = ""
-        st.success(f"Yeni terim başarıyla eklendi: {new_english}")
-    else:
-        st.error("Lütfen tüm alanları doldurduğunuzdan emin olun.")
